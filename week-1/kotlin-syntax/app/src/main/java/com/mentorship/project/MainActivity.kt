@@ -43,6 +43,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLocale
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.input.ImeAction
@@ -51,6 +52,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.mentorship.project.ui.theme.ProjectTheme
 
 class MainActivity : ComponentActivity() {
@@ -66,7 +69,14 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(viewModel: MainViewModel = viewModel()) {
+fun HomeScreen() {
+    val context = LocalContext.current.applicationContext
+    val repository = remember { RepositoryImpl(context) }
+    val viewModel = viewModel<MainViewModel>(factory = viewModelFactory {
+        initializer {
+            MainViewModel(repository)
+        }
+    })
     val snackbarHostState = remember { SnackbarHostState() }
     val state by viewModel.state.collectAsStateWithLifecycle()
     LaunchedEffect(Unit) {
@@ -281,7 +291,18 @@ fun SharedPreferencesTestComponent(
                         )
                     },
                     value = textFieldState,
-                    onValueChange = { textFieldState = it }
+                    onValueChange = { textFieldState = it },
+                    keyboardActions = KeyboardActions(onAny = { onSetValueClick(textFieldState) }),
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = when (state.selectedPreferenceType) {
+                            SharedPreferenceType.INT,
+                            SharedPreferenceType.LONG,
+                            SharedPreferenceType.FLOAT -> KeyboardType.Number
+
+                            else -> KeyboardType.Text
+                        },
+                        imeAction = ImeAction.Done
+                    )
                 )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
