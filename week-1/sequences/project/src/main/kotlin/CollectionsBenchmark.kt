@@ -33,22 +33,56 @@ class CollectionsBenchmark {
     }
 
     @Benchmark
-    fun benchmarkEagerly(blackHole: Blackhole) {
+    fun benchmarkEagerlyTake5(blackhole: Blackhole) {
         val newList = list
             .map { it.toUi() }
             .filter { it.isOverdue }
             .take(5)
-        blackHole.consume(newList)
+        blackhole.consume(newList)
     }
 
     @Benchmark
-    fun benchmarkLazily(blackHole: Blackhole) {
+    fun benchmarkEagerlyWholeList(blackhole: Blackhole) {
+        val newList = list
+            .map { it.toUi() }
+            .filter { it.isOverdue }
+        blackhole.consume(newList)
+    }
+
+    @Benchmark
+    fun benchmarkEagerlyWholeListOnlyMap(blackhole: Blackhole) {
+        val newList = list
+            .map { it.toUi() }
+        blackhole.consume(newList)
+    }
+
+    @Benchmark
+    fun benchmarkLazilyTake5(blackhole: Blackhole) {
         val newList = list
             .asSequence()
             .map { it.toUi() }
             .filter { it.isOverdue }
             .take(5)
             .toList()
-        blackHole.consume(newList)
+        blackhole.consume(newList)
+    }
+
+    @Benchmark
+    fun benchmarkLazilyWholeList(blackhole: Blackhole) {
+        val newList = list
+            .asSequence()
+            .map { it.toUi() }
+            .filter { it.isOverdue }
+            .toList()
+        blackhole.consume(newList)
+    }
+
+    @Benchmark
+    fun benchmarkLazilyWholeListOnlyMap(blackhole: Blackhole) {
+        val newList = list
+            .asSequence()
+            .map { it.toUi() }
+            .toList()
+        blackhole.consume(newList)
     }
 }
