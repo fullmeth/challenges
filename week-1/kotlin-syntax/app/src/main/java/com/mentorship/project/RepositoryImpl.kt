@@ -1,9 +1,11 @@
 package com.mentorship.project
 
 import android.content.Context
-import com.mentorship.project.api.DummyDto
+import com.mentorship.project.api.DummyModel
 import com.mentorship.project.api.RetrofitService
 import com.mentorship.project.utils.Result
+import com.mentorship.project.utils.map
+import com.mentorship.project.utils.recover
 import com.mentorship.project.utils.safeApiCall
 
 class RepositoryImpl(context: Context) : Repository {
@@ -14,8 +16,14 @@ class RepositoryImpl(context: Context) : Repository {
     override suspend fun getDummyResponse(
         code: Int,
         delay: Int?
-    ): Result<DummyDto> = safeApiCall {
-        retrofit.dummyApiService().getDummyJson(code, delay)
+    ): Result<DummyModel> {
+        val result = safeApiCall {
+            retrofit.dummyApiService().getDummyJson(code, delay)
+        }
+        return when (result) {
+            is Result.Error -> result.recover { DummyModel("Recovering Error to DummyUiModel: ${it.exception.message}") }
+            is Result.Success -> result.map { DummyModel("Mapping Success<${it.javaClass.simpleName}> to DummyUiModel: ${it.text}") }
+        }
     }
 
     @Throws(IllegalArgumentException::class)

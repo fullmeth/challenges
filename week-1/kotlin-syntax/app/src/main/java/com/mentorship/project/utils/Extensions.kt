@@ -13,6 +13,14 @@ suspend fun <T> safeApiCall(block: suspend () -> T): Result<T> = try {
     Result.Error(e)
 }
 
+inline fun <T, R> Result.Success<T>.map(crossinline transform: (T) -> R): Result<R> {
+    return Result.Success(transform(this.data))
+}
+
+inline fun <T> Result.Error.recover(crossinline transform: (Result.Error) -> T): Result<T> {
+    return Result.Success(transform(this))
+}
+
 inline fun <reified T : Parcelable> Bundle.getParcelableCompat(key: String): T? =
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         getParcelable(key, T::class.java)

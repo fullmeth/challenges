@@ -2,10 +2,13 @@ package com.mentorship.project
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.mentorship.project.api.DummyDto
 import com.mentorship.project.utils.Result
+import com.mentorship.project.utils.recover
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -20,10 +23,11 @@ class MainViewModel(private val repository: Repository) : ViewModel(), Repositor
 
     fun getResponse(code: Int, delay: Int? = null) {
         viewModelScope.launch {
-            when (val result = repository.getDummyResponse(code, delay)) {
-                is Result.Error -> _events.send(UiEvent.ShowSnackbar(result.exception.message.orEmpty()))
-                is Result.Success -> _events.send(UiEvent.ShowSnackbar(result.data.text))
+            val event = when (val result = repository.getDummyResponse(code, delay)) {
+                is Result.Error -> UiEvent.ShowSnackbar("Error? But its not possible!")
+                is Result.Success -> UiEvent.ShowSnackbar(result.data.message)
             }
+            _events.send(event)
         }
     }
 
