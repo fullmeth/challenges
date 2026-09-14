@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">LifecycleTesting</string>
+    <string name="toggle_theme">Toggle light / dark theme</string>
+</resources>
