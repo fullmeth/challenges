@@ -7,10 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.application
 import androidx.lifecycle.viewModelScope
 import androidx.room3.withWriteTransaction
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -64,49 +63,64 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         db.feedPostDao().insert(post1, post2)
     }
 
-    @OptIn(ExperimentalUuidApi::class)
-    fun onLoadDocument(uri: Uri?) = with(application.applicationContext) {
+    fun onLoadDocument(uri: Uri?) {
         uri?.let { uri ->
             viewModelScope.launch {
                 withContext(Dispatchers.IO) {
-                    val type = contentResolver.getType(uri)?.let {
-                        when {
-                            it.startsWith("image/")  -> 12
-                            it.startsWith("video/")  -> 24
-                            else -> return@withContext
-                        }
-                    } ?: return@withContext
-                    val name = Uuid.generateV7().toString()
-                    contentResolver.openInputStream(uri).use { inputStream ->
-                        inputStream?.let {
-                            openFileOutput(
-                                /* name = */ name,
-                                /* mode = */ Context.MODE_PRIVATE
-                            ).use { outputStream -> inputStream.copyTo(outputStream) }
-                        }
-                    }
-
-                    val file = File("${filesDir}/$name")
-                    if (file.exists()) {
-                        db.withWriteTransaction {
-                            val id = db.mediaFileDao().insert(
-                                MediaFileEntity(
-                                    name = name,
-                                    fullPathInStorage = file.absolutePath,
-                                    type = type
-                                )
-                            )
-                            if (Random.nextBoolean()) {
-                                val taskId = if (Random.nextBoolean()) 20L else 10L
-                                db.taskDao().insert(TaskMediaFileCrossRef(taskId, id))
-                            } else {
-                                val feedPostId = if (Random.nextBoolean()) 200L else 100L
-                                db.feedPostDao().insert(FeedPostMediaFileCrossRef(feedPostId, id))
-                            }
-                        }
+                    try {
+                        importDocument(uri)
+                    } catch (e: Exception) {
+                        if (e is CancellationException) throw e
+                        e.printStackTrace()
                     }
                 }
             }
+        }
+    }
+
+    private suspend fun importDocument(uri: Uri) = with(application.applicationContext) {
+        val name = copyToPrivateStorage(uri)
+        try {
+            db.withWriteTransaction {
+                val id = db.mediaFileDao().insert(
+                    MediaFileEntity(
+                        name = name,
+                        fullPathInStorage = File(filesDir, name).absolutePath,
+                        type = contentResolver.getType(uri) ?: "unknown"
+                    )
+                )
+                if (Random.nextBoolean()) {
+                    val taskId = if (Random.nextBoolean()) 20L else 10L
+                    db.taskDao().insert(TaskMediaFileCrossRef(taskId, id))
+                } else {
+                    val feedPostId = if (Random.nextBoolean()) 200L else 100L
+                    db.feedPostDao().insert(FeedPostMediaFileCrossRef(feedPostId, id))
+                }
+            }
+        } catch (e: Exception) {
+            File(filesDir, name).deleteRecursively()
+            if (e is CancellationException) throw e
+            e.printStackTrace()
+        }
+    }
+
+    @OptIn(ExperimentalUuidApi::class)
+    private fun Context.copyToPrivateStorage(uri: Uri): String {
+        val name = Uuid.generateV7().toString()
+        val tempFile = File(filesDir, "$name.tmp")
+        val finalFile = File(filesDir, name)
+        return try {
+            val inputStream = contentResolver.openInputStream(uri) ?: error("Can't open $uri")
+            inputStream.use { inputStream ->
+                openFileOutput(
+                    /* name = */ "$name.tmp",
+                    /* mode = */ Context.MODE_PRIVATE
+                ).use { outputStream -> inputStream.copyTo(outputStream) }
+                val success = tempFile.renameTo(finalFile)
+                if (success) finalFile.name else error("Something wrong with the file")
+            }
+        } finally {
+            tempFile.deleteRecursively()
         }
     }
 }

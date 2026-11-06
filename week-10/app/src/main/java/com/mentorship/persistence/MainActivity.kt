@@ -70,19 +70,34 @@ class MainActivity : ComponentActivity() {
                             DbHideableColumn("Feed posts", feedPosts) { DbEntry(it) }
                         }
                         item(key = "usersWithCreatedTasks") {
-                            DbHideableColumn("Users with created tasks", usersWithCreatedTasks) { DbEntry(it) }
+                            DbHideableColumn(
+                                "Users with created tasks",
+                                usersWithCreatedTasks
+                            ) { DbEntry(it) }
                         }
                         item(key = "usersWithAssignedTasks") {
-                            DbHideableColumn("Users with assigned tasks", usersWithAssignedTasks) { DbEntry(it) }
+                            DbHideableColumn(
+                                "Users with assigned tasks",
+                                usersWithAssignedTasks
+                            ) { DbEntry(it) }
                         }
                         item(key = "tasksWithAssignedUsers") {
-                            DbHideableColumn("Tasks with assigned users", tasksWithAssignedUsers) { DbEntry(it) }
+                            DbHideableColumn(
+                                "Tasks with assigned users",
+                                tasksWithAssignedUsers
+                            ) { DbEntry(it) }
                         }
                         item(key = "tasksWithMediaFiles") {
-                            DbHideableColumn("Tasks with media files", tasksWithMediaFiles) { DbEntry(it) }
+                            DbHideableColumn(
+                                "Tasks with media files",
+                                tasksWithMediaFiles
+                            ) { DbEntry(it) }
                         }
                         item(key = "feedPostsWithMediaFiles") {
-                            DbHideableColumn("Feed posts with media files", feedPostsWithMediaFiles) { DbEntry(it) }
+                            DbHideableColumn(
+                                "Feed posts with media files",
+                                feedPostsWithMediaFiles
+                            ) { DbEntry(it) }
                         }
                     }
                 }
@@ -146,7 +161,7 @@ fun DbEntry(entry: MediaFileEntity) {
     DbField("mediaFile.id", entry.id)
     DbField("mediaFile.name", entry.name)
     DbField("mediaFile.fullPathInStorage", entry.fullPathInStorage)
-    DbField("mediaFile.type (12 = image, 24 = video)", entry.type)
+    DbField("mediaFile.type", entry.type)
 }
 
 @Composable
@@ -218,7 +233,7 @@ fun GetContentExample(onLoadDocument: (Uri?) -> Unit) {
         onLoadDocument
     )
     Button(
-        onClick = { launcher.launch(arrayOf("image/*", "video/*")) },
+        onClick = { launcher.launch(arrayOf("*/*")) },
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Text("Load Documento")
