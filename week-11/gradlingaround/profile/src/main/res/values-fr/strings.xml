@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="profile_title">Mon profil</string>
+            
+    
+    <string name="profile_description">Gérer vos informations personnelles</string>
+            
+    
+    <string name="profile_action">Modifier le profil</string>
+            
+    
+    <string name="profile_summary">Bienvenue, %1$s !</string>
+        
+
+</resources>

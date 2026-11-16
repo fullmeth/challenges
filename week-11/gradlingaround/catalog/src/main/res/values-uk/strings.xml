@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="catalog_title">Каталог</string>
+            
+    
+    <string name="catalog_description">Переглядайте книги та аксесуари</string>
+            
+    
+    <string name="catalog_action">Пошук товарів</string>
+            
+    
+    <string name="catalog_summary">Знайдено товарів: %1$d</string>
+            
+    
+    <plurals name="catalog_product_count">
+                        
+        
+        <item quantity="one">Один товар (%d)</item>
+                        
+        
+        <item quantity="few">%d товари</item>
+                        
+        
+        <item quantity="many">%d товарів</item>
+                        
+        
+        <item quantity="other">%d товару</item>
+                    
+    
+    </plurals>
+        
+
+</resources>

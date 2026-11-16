@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="catalog_title">Catalog</string>
+            
+    
+    <string name="catalog_description">Browse books &amp; accessories</string>
+            
+    
+    <string name="catalog_action">Search items</string>
+            
+    
+    <string name="catalog_summary">%1$d products found</string>
+            
+    
+    <plurals name="catalog_product_count">
+                        
+        
+        <item quantity="one">Only one product (%d)</item>
+                        
+        
+        <item quantity="other">%d products</item>
+                    
+    
+    </plurals>
+        
+
+</resources>

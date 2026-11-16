@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="profile_settings_title">Налаштування</string>
+            
+    
+    <string name="profile_settings_description">Виберіть параметри застосунку</string>
+            
+    
+    <string name="profile_settings_action">Зберегти зміни</string>
+            
+    
+    <string name="profile_settings_summary">Поточна мова: %1$s</string>
+            
+    
+    <string-array name="profile_settings_themes">
+                        
+        
+        <item>Системна</item>
+                        
+        
+        <item>Світла</item>
+                        
+        
+        <item>Темна</item>
+                    
+    
+    </string-array>
+        
+
+</resources>

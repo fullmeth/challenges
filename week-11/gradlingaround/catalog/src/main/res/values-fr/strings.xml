@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="catalog_title">Catalogue</string>
+            
+    
+    <string name="catalog_description">Parcourir les livres et accessoires</string>
+            
+    
+    <string name="catalog_action">Rechercher des produits</string>
+            
+    
+    <string name="catalog_summary">%1$d produits trouvés</string>
+            
+    
+    <plurals name="catalog_product_count">
+                        
+        
+        <item quantity="one">%d produit</item>
+                        
+        
+        <item quantity="other">%d produits</item>
+                    
+    
+    </plurals>
+        
+
+</resources>

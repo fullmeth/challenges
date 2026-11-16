@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="profile_settings_title">Settings</string>
+            
+    
+    <string name="profile_settings_description">Choose your application preferences</string>
+            
+    
+    <string name="profile_settings_action">Save changes</string>
+            
+    
+    <string name="profile_settings_summary">Current language: %1$s</string>
+            
+    
+    <string-array name="profile_settings_themes">
+                        
+        
+        <item>System default</item>
+                        
+        
+        <item>Light</item>
+                        
+        
+        <item>Dark</item>
+                    
+    
+    </string-array>
+        
+
+</resources>

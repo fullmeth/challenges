@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="core_title">Something went wrong</string>
+            
+    
+    <string name="core_description">Check your internet connection</string>
+            
+    
+    <string name="core_action">Try again</string>
+            
+    
+    <string name="core_summary">Error code: %1$d</string>
+        
+
+</resources>

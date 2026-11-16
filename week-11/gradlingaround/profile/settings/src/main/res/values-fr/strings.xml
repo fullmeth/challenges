@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="profile_settings_title">Paramètres</string>
+            
+    
+    <string name="profile_settings_description">Choisir les préférences de votre application</string>
+            
+    
+    <string name="profile_settings_action">Enregistrer</string>
+            
+    
+    <string name="profile_settings_summary">Langue actuelle : %1$s</string>
+            
+    
+    <string-array name="profile_settings_themes">
+                        
+        
+        <item>Selon le système</item>
+                        
+        
+        <item>Clair</item>
+                        
+        
+        <item>Sombre</item>
+                    
+    
+    </string-array>
+        
+
+</resources>

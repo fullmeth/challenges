@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="core_ui_title">Loading</string>
+            
+    
+    <string name="core_ui_description">Please wait</string>
+            
+    
+    <string name="core_ui_action">Continue</string>
+            
+    
+    <string name="core_ui_summary">Step %1$d of %2$d</string>
+        
+
+</resources>

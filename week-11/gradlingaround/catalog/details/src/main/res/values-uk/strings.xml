@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="catalog_details_title">Деталі товару</string>
+            
+    
+    <string name="catalog_details_description">Дізнайтеся більше про цей товар</string>
+            
+    
+    <string name="catalog_details_action">Додати до кошика</string>
+            
+    
+    <string name="catalog_details_summary">Ціна: %1$s</string>
+        
+
+</resources>

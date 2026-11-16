@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="profile_title">My pro</string>
+            
+    
+    <string name="profile_description">Manage your personal information</string>
+            
+    
+    <string name="profile_action">Edit profile</string>
+            
+    
+    <string name="profile_summary">Welcome, %1$s!</string>
+        
+
+</resources>

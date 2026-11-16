@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="core_title">Щось пішло не так</string>
+            
+    
+    <string name="core_description">Перевірте з’єднання з інтернетом</string>
+            
+    
+    <string name="core_action">Спробувати ще раз</string>
+            
+    
+    <string name="core_summary">Код помилки: %1$d</string>
+        
+
+</resources>

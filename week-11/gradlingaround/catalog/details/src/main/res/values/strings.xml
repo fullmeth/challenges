@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+            
+    
+    <string name="catalog_details_title">Product details</string>
+            
+    
+    <string name="catalog_details_description">Learn more about this product</string>
+            
+    
+    <string name="catalog_details_action">Add to cart</string>
+            
+    
+    <string name="catalog_details_summary">Price: %1$s</string>
+        
+
+</resources>
