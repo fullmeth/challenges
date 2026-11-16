@@ -1,0 +1,23 @@
+{
+  "catalog.catalog_action": "Rechercher des produits",
+  "catalog.catalog_description": "Parcourir les livres et accessoires",
+  "catalog.catalog_product_count.one": "%d produit",
+  "catalog.catalog_product_count.other": "%d produits",
+  "catalog.catalog_summary": "%1$d produits trouvés",
+  "catalog.catalog_title": "Catalogue",
+  "core.ui.core_ui_action": "Continuer",
+  "core.ui.core_ui_description": "Veuillez patienter",
+  "core.ui.core_ui_summary": "Étape %1$d sur %2$d",
+  "core.ui.core_ui_title": "Chargement",
+  "profile.profile_action": "Modifier le profil",
+  "profile.profile_description": "Gérer vos informations personnelles",
+  "profile.profile_summary": "Bienvenue, %1$s !",
+  "profile.profile_title": "Mon profil",
+  "profile.settings.profile_settings_action": "Enregistrer",
+  "profile.settings.profile_settings_description": "Choisir les préférences de votre application",
+  "profile.settings.profile_settings_summary": "Langue actuelle : %1$s",
+  "profile.settings.profile_settings_themes.0": "Selon le système",
+  "profile.settings.profile_settings_themes.1": "Clair",
+  "profile.settings.profile_settings_themes.2": "Sombre",
+  "profile.settings.profile_settings_title": "Paramètres"
+}
